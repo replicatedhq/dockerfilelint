@@ -1,0 +1,28 @@
+{
+  "name": "dockerfilelint",
+  "version": "0.0.1",
+  "description": "A linter for Dockerfiles to find bugs and encourage best practices",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/replicatedhq/dockerfilelint.git"
+  },
+  "keywords": [
+    "dockerfile",
+    "lint",
+    "linter"
+  ],
+  "author": "Marc Campbell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/replicatedhq/dockerfilelint/issues"
+  },
+  "homepage": "https://github.com/replicatedhq/dockerfilelint#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
