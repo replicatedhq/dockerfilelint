@@ -1,6 +1,6 @@
 {
   "name": "dockerfilelint",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A linter for Dockerfiles to find bugs and encourage best practices",
   "main": "./lib/index.js",
   "scripts": {
