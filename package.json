@@ -1,6 +1,6 @@
 {
   "name": "dockerfilelint",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A linter for Dockerfiles to find bugs and encourage best practices",
   "main": "./lib/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/replicatedhq/dockerfilelint#readme",
   "dependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "yargs": "^3.32.0"
   }
 }

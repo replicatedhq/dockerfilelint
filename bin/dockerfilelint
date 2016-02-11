@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var process = require('process');
+var fs = require('fs');
+var argv = require('yargs').argv;
+var dockerfilelint = require('../lib/index');
+
+if (argv._.length === 0) {
+  console.error('Usage: dockerfilelint <filename>');
+  process.exit(1);
+}
+
+try {
+  var stats = fs.lstatSync(argv._[0]);
+  if (!stats.isFile()) {
+    console.error('Argument should be a file');
+    process.exit(1);
+  }
+
+  var fileContent = fs.readFileSync(argv._[0], 'UTF-8');
+  var result = dockerfilelint.run(fileContent);
+  console.log(result);
+} catch (e) {
+  if (e.code === 'ENOENT') {
+    console.error('File not found');
+    process.exit(1);
+  }
+
+  console.error(e);
+  process.exit(1);
+}
