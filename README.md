@@ -33,6 +33,8 @@ From the command line:
 - [x] apt-get install commands should be paired with a `rm -rf /var/lib/apt/lists/*` in the same layer
 - [x] Avoid running `apt-get upgrade` or `apt-get dist-upgrade`
 - [x] Never run `apt-get update` without `apt-get install` on the same line
+- [x] apk add commands should include a `--no-cache` flag or be paired with an `--update` flag with `rm -rf /var/cache/apk/*` in the same layer
+- [ ] apk add support for --virtual flag
 - [ ] handle best practices for yum operations and cleanup
 
 ### `CMD`

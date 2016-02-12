@@ -8,12 +8,13 @@ this is not a command
 
 MAINTAINER test
 
-ADD 
+ADD
 RUN sudo rm /tmp/1
 RUN apt-get upgrade
 RUN apt-get install python
 RUN apt-get dist-upgrade
 RUN apt-get update -y
+RUN apk add python-pip
 
 EXPOSE 80a
 EXPOSE 80:80
