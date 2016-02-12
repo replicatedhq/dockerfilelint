@@ -1,0 +1,4 @@
+env:
+  node: true
+ecmaFeatures:
+  templateStrings: true
