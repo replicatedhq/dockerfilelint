@@ -1,0 +1,14 @@
+FROM ubuntu:14.04
+
+VOLUME /tmp
+
+LABEL test=test
+COPY ./test /tmp
+USER ubuntu
+WORKDIR invalid
+ARG test
+ONBUILD RUN echo test
+STOPSIGNAL SIGKILL
+
+CMD ["bash"]
+ENTRYPOINT ["bash"]
