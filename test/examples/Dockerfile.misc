@@ -1,14 +1,31 @@
-FROM ubuntu:14.04
+# This Dockerfile is designed to test error paths in index.js
+# Don't model anything after this :)
 
+CMD ["test"]
+FROM ubuntu
+FROM ubuntu:latest
+this is not a command
+
+MAINTAINER test
+
+ADD 
+RUN sudo rm /tmp/1
+RUN apt-get upgrade
+RUN apt-get install python
+RUN apt-get dist-upgrade
+RUN apt-get update -y
+
+EXPOSE 80a
+EXPOSE 80:80
 VOLUME /tmp
-
-LABEL test=test
+ENV testsomething=test valuye
+LABEL test test
 COPY ./test /tmp
-USER ubuntu
-WORKDIR invalid
+USER ubuntu ubuntu
+WORKDIR in valid
 ARG test
 ONBUILD RUN echo test
 STOPSIGNAL SIGKILL
-
+ADD /test* /test2
 CMD ["bash"]
 ENTRYPOINT ["bash"]

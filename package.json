@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/replicatedhq/dockerfilelint#readme",
   "dependencies": {
+    "lodash": "^4.3.0",
     "yargs": "^3.32.0"
   },
   "devDependencies": {
