@@ -1,0 +1,6 @@
+extends:
+  - defaults
+env:
+  node: true
+ecmaFeatures:
+  templateStrings: true
