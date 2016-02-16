@@ -4,6 +4,8 @@ var process = require('process');
 var fs = require('fs');
 var argv = require('yargs').argv;
 var dockerfilelint = require('../lib/index');
+var CliReporter = require('../lib/cli_reporter');
+var chalk = require('chalk');
 
 if (argv._.length === 0) {
   console.error('Usage: dockerfilelint <filename>');
@@ -19,10 +21,14 @@ try {
 
   var fileContent = fs.readFileSync(argv._[0], 'UTF-8');
   var result = dockerfilelint.run(fileContent);
-  console.log(result);
+  var reporter = new CliReporter();
+  reporter.addFile(argv._[0], fileContent, result);
+  var report = reporter.buildReport();
+  console.log(report.toString());
+  process.exit(report.totalIssues);
 } catch (e) {
   if (e.code === 'ENOENT') {
-    console.error('File not found');
+    console.error(chalk.red('File not found'));
     process.exit(1);
   }
 
