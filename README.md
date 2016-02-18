@@ -14,6 +14,8 @@ From the command line:
 ./bin/dockerfilelint <path/to/Dockerfile>
 ```
 
+If you don't want to install this locally you can try it out [here](https://www.fromlatest.io/#/).
+
 ## Checks performed
 ### `FROM`
 - [x] This should be the first command in the Dockerfile
