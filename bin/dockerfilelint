@@ -8,30 +8,29 @@ var CliReporter = require('../lib/cli_reporter');
 var chalk = require('chalk');
 
 if (argv._.length === 0) {
-  console.error('Usage: dockerfilelint <filename>');
+  console.error('Usage: dockerfilelint <filename or dockerfile contents>');
   process.exit(1);
 }
 
+var fileContent;
 try {
   var stats = fs.lstatSync(argv._[0]);
-  if (!stats.isFile()) {
-    console.error('Argument should be a file');
-    process.exit(1);
+  if (stats.isFile()) {
+    fileContent = fs.readFileSync(argv._[0], 'UTF-8');
   }
-
-  var fileContent = fs.readFileSync(argv._[0], 'UTF-8');
-  var result = dockerfilelint.run(fileContent);
-  var reporter = new CliReporter();
-  reporter.addFile(argv._[0], fileContent, result);
-  var report = reporter.buildReport();
-  console.log(report.toString());
-  process.exit(report.totalIssues);
 } catch (e) {
   if (e.code === 'ENOENT') {
-    console.error(chalk.red('File not found'));
-    process.exit(1);
+    fileContent = argv._[0];
   }
-
-  console.error(e);
-  process.exit(1);
 }
+
+if (!fileContent) {
+  console.error(chalk.red('Invalid input'));
+}
+
+var result = dockerfilelint.run(fileContent);
+var reporter = new CliReporter();
+reporter.addFile(argv._[0], fileContent, result);
+var report = reporter.buildReport();
+console.log(report.toString());
+process.exit(report.totalIssues);
