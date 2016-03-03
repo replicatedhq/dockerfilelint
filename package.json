@@ -3,6 +3,9 @@
   "version": "0.0.9",
   "description": "A linter for Dockerfiles to find bugs and encourage best practices",
   "main": "./lib/index.js",
+  "bin": {
+    "dockerfilelint": "bin/dockerfilelint"
+  },
   "scripts": {
     "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
