@@ -9,12 +9,19 @@
 Start unit tests with `npm test`
 
 ## Running
-From the command line:
+#### From the command line:
 ```shell
 ./bin/dockerfilelint <path/to/Dockerfile>
 ```
 
-If you don't want to install this locally you can try it out [here](https://www.fromlatest.io/#/).
+#### From a Docker container
+(Replace the ``pwd``/Dockerfile with the path to your local Dockerfile)
+```shell
+sudo docker run -v `pwd`/Dockerfile:/Dockerfile dockerfilelint /Dockerfile
+```
+
+#### Online
+If you don't want to install this locally you can try it out on  [https://fromlatest.io](https://www.fromlatest.io/#/).
 
 ## Checks performed
 ### `FROM`
