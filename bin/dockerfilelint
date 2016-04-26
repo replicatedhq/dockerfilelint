@@ -26,6 +26,11 @@ if (argv._.length === 0 || argv._[0] === '-') {
   });
 }
 
+var ignored = [];
+if (argv.ignore) {
+  ignored = argv.ignore.split(',');
+}
+
 var fileName = argv._[0];
 try {
   var stats = fs.lstatSync(fileName);
@@ -44,10 +49,10 @@ if (!fileContent) {
   return process.exit(1);
 }
 
-processContent(fileName, fileContent);
+processContent(fileName, fileContent, ignored);
 
-function processContent (name, content) {
-  var result = dockerfilelint.run(content);
+function processContent (name, content, ignored) {
+  var result = dockerfilelint.run(content, ignored);
   var reporter = new CliReporter();
   reporter.addFile(name, content, result);
   var report = reporter.buildReport();
