@@ -15,6 +15,7 @@ RUN apt-get install python
 RUN apt-get dist-upgrade
 RUN apt-get update -y
 RUN apk add python-pip
+RUN apk add --no-cache python-dev build-base wget && apk del python-dev build-base wget
 
 EXPOSE 80a
 EXPOSE 80:80

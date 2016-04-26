@@ -43,7 +43,7 @@ If you don't want to install this locally you can try it out on  [https://fromla
 - [x] Avoid running `apt-get upgrade` or `apt-get dist-upgrade`
 - [x] Never run `apt-get update` without `apt-get install` on the same line
 - [x] apk add commands should include a `--no-cache` flag or be paired with an `--update` flag with `rm -rf /var/cache/apk/*` in the same layer
-- [ ] apk add support for --virtual flag
+- [x] apk add support for --virtual flag
 - [ ] handle best practices for yum operations and cleanup
 
 ### `CMD`
