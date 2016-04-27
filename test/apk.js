@@ -25,6 +25,14 @@ describe("apk", function(){
     });
   });
 
+  describe("#apkadd_numpackages(command)", function(){
+    it("validates that the num packages are counted correctly", function(){
+      expect(apk.apkadd_numpackages("apk add one")).to.equal(1);
+      expect(apk.apkadd_numpackages("")).to.equal(0);
+      expect(apk.apkadd_numpackages("apk add one two")).to.equal(2);
+    });
+  });
+
   describe("#apkadd_hasupdate(command)", function(){
     it("validates that --no-cache flag is present on apk add commands", function(){
       expect(apk.apkadd_hasupdate("apk --no-cache add python-pip")).to.equal(false);

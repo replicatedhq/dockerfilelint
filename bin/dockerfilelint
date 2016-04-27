@@ -2,15 +2,18 @@
 
 var process = require('process');
 var fs = require('fs');
+var os = require("os");
+var path = require('path');
 var argv = require('yargs').argv;
 var dockerfilelint = require('../lib/index');
 var CliReporter = require('../lib/cli_reporter');
 var chalk = require('chalk');
 
-var fileContent;
+var fileContent, configFilePath;
 if (argv._.length === 0 || argv._[0] === '-') {
   // read content from stdin
   fileContent = '';
+  configFilePath = '.';
 
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -31,11 +34,14 @@ try {
   var stats = fs.lstatSync(fileName);
   if (stats.isFile()) {
     fileContent = fs.readFileSync(fileName, 'UTF-8');
+    var root = (os.platform == "win32") ? process.cwd().split(path.sep)[0] : "/";
+    configFilePath = path.resolve(path.dirname(fileName));
   }
 } catch (e) {
   if (e.code === 'ENOENT') {
     fileContent = fileName;
     fileName = '<contents>';
+    configFilePath = './';
   }
 }
 
@@ -44,10 +50,10 @@ if (!fileContent) {
   return process.exit(1);
 }
 
-processContent(fileName, fileContent);
+processContent(configFilePath, fileName, fileContent);
 
-function processContent (name, content) {
-  var result = dockerfilelint.run(content);
+function processContent (configFilePath, name, content) {
+  var result = dockerfilelint.run(configFilePath, content);
   var reporter = new CliReporter();
   reporter.addFile(name, content, result);
   var report = reporter.buildReport();

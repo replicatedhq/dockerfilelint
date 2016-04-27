@@ -14,6 +14,44 @@ Start unit tests with `npm test`
 ./bin/dockerfilelint <path/to/Dockerfile>
 ```
 
+#### Configuring
+You can configure the linter by creating a `.dockerfilelintrc` with the following syntax:
+```yaml
+rules:
+  uppercase_commands: off
+```
+
+The keys for the rules can be any file in the /lib/reference.js file.  At this time, it's only possible to disable rules.  They are all enabled by default.  
+
+The following rules are supported:  
+```
+required_params
+uppercase_commands
+from_first
+invalid_line
+sudo_usage
+apt-get_missing_param
+apt-get_recommends
+apt-get-upgrade
+apt-get-dist-upgrade
+apt-get-update_require_install
+apkadd-missing_nocache_or_updaterm
+apkadd-missing-virtual
+invalid_port
+invalid_command
+expose_host_port
+label_invalid
+missing_tag
+latest_tag
+extra_args
+missing_args
+add_src_invalid
+add_dest_invalid
+invalid_workdir
+invalid_format
+apt-get_missing_rm
+```
+
 #### From a Docker container
 (Replace the ``pwd``/Dockerfile with the path to your local Dockerfile)
 ```shell
