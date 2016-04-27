@@ -1,6 +1,6 @@
 {
   "name": "dockerfilelint",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "A linter for Dockerfiles to find bugs and encourage best practices",
   "main": "./lib/index.js",
   "bin": {
@@ -28,6 +28,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "cliui": "^3.1.0",
+    "js-yaml": "^3.6.0",
     "lodash": "^4.3.0",
     "yargs": "^3.32.0"
   },
