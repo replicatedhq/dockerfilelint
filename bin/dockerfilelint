@@ -25,7 +25,7 @@ if (argv._.length === 0 || argv._[0] === '-') {
       console.error('Usage: dockerfilelint <filename or dockerfile contents>');
       return process.exit(1);
     }
-    processContent('<stdin>', fileContent);
+    processContent(configFilePath, '<stdin>', fileContent);
   });
 }
 
