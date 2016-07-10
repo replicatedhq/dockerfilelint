@@ -30,4 +30,5 @@ ONBUILD RUN echo test
 STOPSIGNAL SIGKILL
 ADD /test* /test2
 CMD ["bash"]
+SHELL ["/bin/sh", "-c"]
 ENTRYPOINT ["bash"]
