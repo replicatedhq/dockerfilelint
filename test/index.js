@@ -64,6 +64,27 @@ describe("index", function(){
     });
   });
 
+  describe("#shell", function() {
+    it("validates the shell command is accepted when entered correctly", function() {
+      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.shell.pass', 'UTF-8'))).to.be.empty;
+    });
+
+    it("validates the shell command detects invalid shell commands", function() {
+      var expected = [
+        { title: 'Invalid Argument Format',
+          line: 4,
+          rule: 'invalid_format'}
+      ];
+      var result = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.shell.fail', 'UTF-8'));
+      _.forEach(result, function(r) {
+        delete r['description'];
+        delete r['category'];
+      });
+      expect(result).to.have.length(expected.length);
+      expect(result).to.deep.equal(expected);
+    });
+  });
+
   describe("#misc", function(){
     it("validates the misc Dockerfile have the exact right issues reported", function(){
       var expected = [
