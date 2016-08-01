@@ -31,15 +31,15 @@
     "cliui": "^3.1.0",
     "js-yaml": "^3.6.0",
     "lodash": "^4.3.0",
-    "yargs": "^3.32.0"
+    "yargs": "^4.8.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.6",
-    "eslint": "^1.10.3",
+    "eslint": "^3.0.1",
     "eslint-config-defaults": "^9.0.0",
     "mocha": "^2.4.5",
-    "nyc": "^5.6.0",
+    "nyc": "^7.0.0",
     "standard-version": "^2.3.0"
   }
 }
