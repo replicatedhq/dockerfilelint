@@ -6,8 +6,12 @@ var os = require("os");
 var path = require('path');
 var argv = require('yargs').argv;
 var dockerfilelint = require('../lib/index');
-var CliReporter = require('../lib/cli_reporter');
 var chalk = require('chalk');
+
+// reporter could be a command line option
+// but until we have others, just use CliReporter
+var CliReporter = require('../lib/cli_reporter');
+var reporter = new CliReporter();
 
 var fileContent, configFilePath;
 if (argv._.length === 0 || argv._[0] === '-') {
@@ -26,36 +30,41 @@ if (argv._.length === 0 || argv._[0] === '-') {
       return process.exit(1);
     }
     processContent(configFilePath, '<stdin>', fileContent);
+    report();
   });
 }
 
-var fileName = argv._[0];
-try {
-  var stats = fs.lstatSync(fileName);
-  if (stats.isFile()) {
-    fileContent = fs.readFileSync(fileName, 'UTF-8');
-    var root = (os.platform == "win32") ? process.cwd().split(path.sep)[0] : "/";
-    configFilePath = path.resolve(path.dirname(fileName));
+argv._.forEach((fileName) => {
+  try {
+    var stats = fs.lstatSync(fileName);
+    if (stats.isFile()) {
+      fileContent = fs.readFileSync(fileName, 'UTF-8');
+      var root = (os.platform == "win32") ? process.cwd().split(path.sep)[0] : "/";
+      configFilePath = path.resolve(path.dirname(fileName));
+    }
+  } catch (e) {
+    if (e.code === 'ENOENT') {
+      fileContent = fileName;
+      fileName = '<contents>';
+      configFilePath = './';
+    }
   }
-} catch (e) {
-  if (e.code === 'ENOENT') {
-    fileContent = fileName;
-    fileName = '<contents>';
-    configFilePath = './';
+
+  if (!fileContent) {
+    console.error(chalk.red('Invalid input:'), fileName);
+    return process.exit(1);
   }
-}
 
-if (!fileContent) {
-  console.error(chalk.red('Invalid input'));
-  return process.exit(1);
-}
+  processContent(configFilePath, fileName, fileContent);
+});
 
-processContent(configFilePath, fileName, fileContent);
+report();
 
 function processContent (configFilePath, name, content) {
-  var result = dockerfilelint.run(configFilePath, content);
-  var reporter = new CliReporter();
-  reporter.addFile(name, content, result);
+  reporter.addFile(name, content, dockerfilelint.run(configFilePath, content));
+}
+
+function report () {
   var report = reporter.buildReport();
   console.log(report.toString());
   process.exit(report.totalIssues);
