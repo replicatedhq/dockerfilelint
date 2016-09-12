@@ -7,11 +7,11 @@ node_js:
   - '4'
 after_success:
   - npm run coverage
-  - docker build -t replicated/dockerfilelint:$TRAVIS_COMMIT .
+  - docker build -t replicated/dockerfilelint:${TRAVIS_COMMIT:0:7} .
   - |
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_NODE_VERSION" == "node" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker tag replicated/dockerfilelint:$TRAVIS_COMMIT replicated/dockerfilelint:latest;
-    docker push replicated/dockerfilelint:$TRAVIS_COMMIT;
+    docker tag replicated/dockerfilelint:${TRAVIS_COMMIT:0:7} replicated/dockerfilelint:latest;
+    docker push replicated/dockerfilelint:${TRAVIS_COMMIT:0:7};
     docker push replicated/dockerfilelint:latest;
     fi
