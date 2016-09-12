@@ -9,7 +9,7 @@ after_success:
   - npm run coverage
   - docker build -t replicated/dockerfilelint:$TRAVIS_COMMIT .
   - |
-    if [ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_NODE_VERSION" == "node" ]; then
+    if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_NODE_VERSION" == "node" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker tag replicated/dockerfilelint:$TRAVIS_COMMIT replicated/dockerfilelint:latest;
     docker push replicated/dockerfilelint:$TRAVIS_COMMIT;
