@@ -159,22 +159,19 @@ describe("index", function(){
             line: 23 },
           { title: 'Label Is Invalid',
             rule: 'label_invalid',
-            line: 24 },
-          { title: 'Label Is Invalid',
-            rule: 'label_invalid',
-            line: 24 },
+            line: 25 },
           { title: 'Extra Arguments',
             rule: 'extra_args',
-            line: 26 },
+            line: 27 },
           { title: 'Invalid WORKDIR',
             rule: 'invalid_workdir',
-            line: 27 },
+            line: 28 },
           { title: 'Invalid ADD Source',
             rule: 'add_src_invalid',
-            line: 31 },
+            line: 32 },
           { title: 'Invalid ADD Destination',
             rule: 'add_dest_invalid',
-            line: 31 }
+            line: 32 }
         ];
 
       var result = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.misc', 'UTF-8'));
