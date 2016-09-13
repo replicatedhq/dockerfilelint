@@ -14,6 +14,10 @@ RUN apt-get upgrade
 RUN apt-get install python
 RUN apt-get dist-upgrade
 RUN apt-get update -y
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+		curl \
+	&& rm -rf /var/lib/apt/lists/*
 RUN apk add python-pip
 RUN apk add --no-cache python-dev build-base wget && apk del python-dev build-base wget
 

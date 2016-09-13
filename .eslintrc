@@ -2,5 +2,6 @@ extends:
   - defaults
 env:
   node: true
+  mocha: true
 ecmaFeatures:
   templateStrings: true
