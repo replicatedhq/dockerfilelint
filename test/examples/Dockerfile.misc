@@ -20,8 +20,9 @@ RUN apk add --no-cache python-dev build-base wget && apk del python-dev build-ba
 EXPOSE 80a
 EXPOSE 80:80
 VOLUME /tmp
-ENV testsomething=test valuye
-LABEL test test
+ENV testsomething=test value
+LABEL test="value value" test='value value' test=value\ value
+LABEL test value
 COPY ./test /tmp
 USER ubuntu ubuntu
 WORKDIR in valid

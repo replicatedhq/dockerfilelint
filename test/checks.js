@@ -21,10 +21,18 @@ describe("checks", function(){
 
   describe("#label_format(args)", function(){
     it("validates label command in key=value format", function(){
+      expect(checks.label_format("")).to.be.empty;
       expect(checks.label_format("key=value")).to.be.empty;
       expect(checks.label_format("key=value key=value")).to.be.empty;
+      expect(checks.label_format("namespace.key=value")).to.be.empty;
+      expect(checks.label_format("key=\"value value\"")).to.be.empty;
+      expect(checks.label_format("key=value value")).to.have.length(1);
+      expect(checks.label_format("key key=value")).to.have.length(1);
+      expect(checks.label_format("key=value\\ value")).to.be.empty;
+      expect(checks.label_format("key=")).to.be.empty;
+      expect(checks.label_format("key=   ")).to.be.empty;
       expect(checks.label_format("key")).to.have.length(1);
-      expect(checks.label_format("key value")).to.have.length(2);
+      expect(checks.label_format("key value")).to.have.length(1);
     });
   });
 
