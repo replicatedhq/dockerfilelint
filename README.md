@@ -55,7 +55,7 @@ apt-get_missing_rm
 #### From a Docker container
 (Replace the ``pwd``/Dockerfile with the path to your local Dockerfile)
 ```shell
-sudo docker run -v `pwd`/Dockerfile:/Dockerfile dockerfilelint /Dockerfile
+sudo docker run -v `pwd`/Dockerfile:/Dockerfile replicated/dockerfilelint /Dockerfile
 ```
 
 #### Online
