@@ -40,6 +40,6 @@
     "eslint-config-defaults": "^9.0.0",
     "nyc": "^10.1.2",
     "mocha": "^3.0.0",
-    "standard-version": "^2.3.0"
+    "standard-version": "^3.0.0"
   }
 }
