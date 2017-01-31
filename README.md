@@ -3,10 +3,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/replicatedhq/dockerfilelint/badge.svg?branch=master)](https://coveralls.io/github/replicatedhq/dockerfilelint?branch=master)
 [![Build Status](https://travis-ci.org/replicatedhq/dockerfilelint.svg?branch=master)](https://travis-ci.org/replicatedhq/dockerfilelint)
 
-`Dockerfilelint` is an npm module that analyzes a Dockerfile and looks for common traps, mistakes and helps enforce best practices:
+`Dockerfilelint` is an node module that analyzes a Dockerfile and looks for common traps, mistakes and helps enforce best practices:
 
 ## Testing
-Start unit tests with `npm test`
+Start unit tests with `npm test` or `yarn run test`
 
 ## Running
 #### From the command line:
@@ -55,7 +55,7 @@ apt-get_missing_rm
 #### From a Docker container
 (Replace the ``pwd``/Dockerfile with the path to your local Dockerfile)
 ```shell
-sudo docker run -v `pwd`/Dockerfile:/Dockerfile replicated/dockerfilelint /Dockerfile
+docker run -v `pwd`/Dockerfile:/Dockerfile replicated/dockerfilelint /Dockerfile
 ```
 
 #### Online
