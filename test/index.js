@@ -29,8 +29,8 @@ describe("index", function(){
   });
 
   describe("#nginx", function(){
-    it("validates the nginx Dockerfile has 1 issue (known issue)", function(){
-      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.nginx', 'UTF-8'))).to.have.length(1);
+    it("validates the nginx Dockerfile has 2 issue (known issue)", function(){
+      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.nginx', 'UTF-8'))).to.have.length(2);
     });
   });
 
@@ -111,6 +111,9 @@ describe("index", function(){
             line: 7 },
           { title: 'Missing Arguments',
             rule: 'missing_args',
+            line: 9 },
+          { title: 'Deprecated as of Docker 1.13',
+            rule: 'deprecated_in_1.13',
             line: 9 },
           { title: 'Missing Required Arguments',
             rule: 'required_params',
