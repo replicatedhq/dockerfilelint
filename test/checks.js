@@ -54,10 +54,10 @@ describe("checks", function(){
   });
 
   describe("#valid_maintainer(args)", function(){
-    it("validates maintainer command has exactly one maintainer", function(){
-      expect(checks.valid_maintainer("user <test@gmail.com>")).to.be.empty;
-      expect(checks.valid_maintainer("user without email")).to.have.length(1);
-      expect(checks.valid_maintainer("user <test@gmail.com> user2 <test@gmail.com>")).to.have.length(1);
+    it("validates maintainer command has exactly one maintainer and outputs MAINTAINER is deprecated in 1.13", function(){
+      expect(checks.valid_maintainer("user <test@gmail.com>")).to.have.length(1).and.to.eql(['deprecated_in_1.13']);
+      expect(checks.valid_maintainer("user without email")).to.have.length(2);
+      expect(checks.valid_maintainer("user <test@gmail.com> user2 <test@gmail.com>")).to.have.length(2);
     });
   });
 

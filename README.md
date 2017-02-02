@@ -50,6 +50,7 @@ add_dest_invalid
 invalid_workdir
 invalid_format
 apt-get_missing_rm
+deprecated_in_1.13
 ```
 
 #### From a Docker container
