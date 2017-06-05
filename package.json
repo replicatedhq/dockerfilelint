@@ -34,7 +34,7 @@
     "yargs": "^6.6.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.0.1",
     "coveralls": "^2.11.6",
     "eslint": "^3.2.2",
     "eslint-config-defaults": "^9.0.0",
