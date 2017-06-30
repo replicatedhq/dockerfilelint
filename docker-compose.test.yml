@@ -1,0 +1,10 @@
+version: '2'
+services:
+  dockerfilelint:
+    build: .
+    image: dockerfilelint
+    entrypoint: npm test
+    volumes:
+      - ./bin:/dockerfilelint/bin
+      - ./lib:/dockerfilelint/lib
+      - ./test:/dockerfilelint/test

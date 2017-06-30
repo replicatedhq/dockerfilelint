@@ -6,7 +6,7 @@
 `Dockerfilelint` is an node module that analyzes a Dockerfile and looks for common traps, mistakes and helps enforce best practices:
 
 ## Testing
-Start unit tests with `npm test` or `yarn run test`
+Start unit tests with `npm test`, `yarn run test`, or `docker-compose -f docker-compose.test.yml up`
 
 ## Running
 #### From the command line:
