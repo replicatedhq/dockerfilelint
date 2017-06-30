@@ -156,4 +156,11 @@ describe('reporter', () => {
       });
     });
   });
+
+  describe('#buildReport()', () => {
+    it('raises when called from base reporter class', () => {
+      let reporter = new Reporter();
+      expect(function() { reporter.buildReport(); }).to.throw();
+    });
+  });
 });
