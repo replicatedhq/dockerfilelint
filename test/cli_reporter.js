@@ -3,7 +3,7 @@
 var chalk = require('chalk');
 var expect = require('chai').expect;
 var fs = require('fs');
-var CliReporter = require('../lib/cli_reporter.js');
+var CliReporter = require('../lib/reporter/cli_reporter.js');
 
 describe('cli_reporter', () => {
   describe('#constructor(opts)', () => {
