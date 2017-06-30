@@ -8,7 +8,7 @@ describe('reporter', () => {
   describe('#constructor(opts)', () => {
     it('sets defaults with no options given', () => {
       let reporter = new Reporter();
-      expect(reporter.fileReports).to.equal({});
+      expect(reporter.fileReports).to.be.empty;
     });
   });
 

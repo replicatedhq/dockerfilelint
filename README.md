@@ -14,6 +14,15 @@ Start unit tests with `npm test`, `yarn run test`, or `docker-compose -f docker-
 ./bin/dockerfilelint <path/to/Dockerfile>
 ```
 
+```shell
+./bin/dockerfilelint --help
+
+Options:
+  --help        Show help                                              [boolean]
+  -o, --output  the format in which you want to display the lint results
+                (default is cli)
+```
+
 #### Configuring
 You can configure the linter by creating a `.dockerfilelintrc` with the following syntax:
 ```yaml

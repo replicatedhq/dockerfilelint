@@ -4,12 +4,14 @@ var process = require('process');
 var fs = require('fs');
 var os = require("os");
 var path = require('path');
-var argv = require('yargs').alias('o', 'output').argv;
+var argv = require('yargs')
+            .alias('o', 'output')
+            .describe('output', 'the format in which you want to display the lint results (default is cli)')
+            .help()
+            .argv;
 var dockerfilelint = require('../lib/index');
 var chalk = require('chalk');
 
-// reporter could be a command line option
-// but until we have others, just use CliReporter
 var CliReporter = require('../lib/reporter/cli_reporter');
 var JsonReporter = require('../lib/reporter/json_reporter');
 var reporter;

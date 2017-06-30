@@ -8,8 +8,8 @@ describe('json_reporter', () => {
   describe('#constructor(opts)', () => {
     it('sets defaults with no options given', () => {
       let reporter = new JsonReporter();
-      expect(reporter.fileReports).to.equal({});
-      expect(reporter.json).to.equal({});
+      expect(reporter.fileReports).to.be.empty;
+      expect(reporter.json).to.be.empty;
     });
   });
 
@@ -182,11 +182,12 @@ describe('json_reporter', () => {
       expect(report.toString()).to.equal(JSON.stringify(expectedJson));
     });
 
-    it('returns json with a multiple files that have no issues associated on green build', () => {
+    it('returns json with multiple files that have no issues associated on green build', () => {
       let file1 = './test/examples/Dockerfile.busybox';
       let file2 = './test/examples/Dockerfile.debian';
       let report = new JsonReporter()
-        .addFile(file, fs.readFileSync(file, 'UTF-8'), [])
+        .addFile(file1, fs.readFileSync(file1, 'UTF-8'), [])
+        .addFile(file2, fs.readFileSync(file2, 'UTF-8'), [])
         .buildReport();
       let expectedJson = {
         files: [
@@ -200,7 +201,7 @@ describe('json_reporter', () => {
       expect(report.toString()).to.equal(JSON.stringify(expectedJson));
     });
 
-    it('returns json with build up issues config on added file with issues', () => {
+    it('returns json with built up issues when a file with issues is added', () => {
       let file = './test/examples/Dockerfile.misc';
       let items = [
         {
