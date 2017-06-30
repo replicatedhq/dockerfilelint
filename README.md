@@ -14,6 +14,7 @@ Start unit tests with `npm test`, `yarn run test`, or `docker-compose -f docker-
 ./bin/dockerfilelint <path/to/Dockerfile>
 ```
 
+#### Command Line options
 ```shell
 ./bin/dockerfilelint --help
 

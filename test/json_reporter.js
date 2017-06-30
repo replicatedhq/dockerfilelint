@@ -205,42 +205,42 @@ describe('json_reporter', () => {
       let file = './test/examples/Dockerfile.misc';
       let items = [
         {
-          title: 'Base Image Missing Tag',
-          description: 'Base images should specify a tag to use.',
-          category: 'Clarity',
+          line: '5',
           content: 'FROM ubuntu',
-          line: 5
-        },
-        {
-          title: 'First Command Must Be FROM',
-          description: 'The first instruction in a Dockerfile must specify the base image using a FROM command.  Additionally, FROM cannot appear later in a Dockerfile.',
-          category: 'Possible Bug',
-          content: 'FROM ubuntu:latest',
-          line: 6
-        },
-        {
-          title: 'Base Image Latest Tag',
-          description: 'Base images should not use the latest tag.',
           category: 'Clarity',
-          content: 'FROM ubuntu:latest',
-          line: 6
+          title: 'Base Image Missing Tag',
+          description: 'Base images should specify a tag to use.'
         },
         {
-          title: 'Expose Only Container Port',
-          description: 'Using `EXPOSE` to specify a host port is not allowed.',
-          category: 'Deprecation',
+          line: '6',
+          content: 'FROM ubuntu:latest',
+          category: 'Possible Bug',
+          title: 'First Command Must Be FROM',
+          description: 'The first instruction in a Dockerfile must specify the base image using a FROM command.  Additionally, FROM cannot appear later in a Dockerfile.'
+        },
+        {
+          line: '6',
+          content: 'FROM ubuntu:latest',
+          category: 'Clarity',
+          title: 'Base Image Latest Tag',
+          description: 'Base images should not use the latest tag.'
+        },
+        {
+          line: '25',
           content: 'EXPOSE 80:80',
-          line: 25
+          category: 'Deprecation',
+          title: 'Expose Only Container Port',
+          description: 'Using `EXPOSE` to specify a host port is not allowed.'
         }
       ];
       let report = new JsonReporter()
-        .addFile(file, fs.readFileSync(file, 'UTF-8'), [])
+        .addFile(file, fs.readFileSync(file, 'UTF-8'), items)
         .buildReport();
       let expectedJson = {
         files: [
           { file: file, issues_count: 4, issues: items }
         ],
-        totalIssues: 0
+        totalIssues: 4
       };
 
       expect(report.totalIssues).to.equal(4);
