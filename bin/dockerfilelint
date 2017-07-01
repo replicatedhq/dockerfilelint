@@ -5,16 +5,34 @@ var fs = require('fs');
 var os = require("os");
 var path = require('path');
 var argv = require('yargs')
-            .alias('o', 'output')
-            .describe('output', 'the format in which you want to display the lint results (default is cli)')
-            .help()
-            .argv;
+             .usage('Usage: dockerfilelint [files | content..] [options]')
+             .option('o', {
+               alias: 'output',
+               desc: 'Specify the format to use for output of linting results. Valid values are `json` or `cli` (default).',
+               type: 'string'
+             })
+             .option('j', {
+               alias: 'json',
+               desc: 'Output linting results as JSON, equivalent to `-o json`.',
+               type: 'boolean'
+             })
+             .help().alias('h', 'help')
+             .example('dockerfilelint Dockerfile', 'Lint a Dockerfile in the current working directory\n')
+             .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
+             .example(`dockerfilelint 'FROM latest'`, 'Lint the contents given as a string on the command line\n')
+             .example('dockerfilelint < Dockerfile', 'Lint the contents of Dockerfile via stdin')
+             .wrap(85)
+             .check(argv => {
+               if (!argv.output && argv.json) argv.output = 'json'
+               return true
+             })
+             .argv;
+
 var dockerfilelint = require('../lib/index');
 var chalk = require('chalk');
 
-var CliReporter = require('../lib/reporter/cli_reporter');
-var JsonReporter = require('../lib/reporter/json_reporter');
-var reporter;
+var Reporter = argv.output === 'json' ? require('../lib/reporter/json_reporter') : require('../lib/reporter/cli_reporter');
+var reporter = new Reporter();
 
 var fileContent, configFilePath;
 if (argv._.length === 0 || argv._[0] === '-') {
@@ -22,7 +40,6 @@ if (argv._.length === 0 || argv._[0] === '-') {
   fileContent = '';
   configFilePath = '.';
 
-  console.log(argv._.toString());
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', function (chunk) {
@@ -37,8 +54,6 @@ if (argv._.length === 0 || argv._[0] === '-') {
     report();
   });
 }
-
-setReporter();
 
 argv._.forEach((fileName) => {
   try {
@@ -65,17 +80,6 @@ argv._.forEach((fileName) => {
 });
 
 report();
-
-function setReporter() {
-  switch(argv.output) {
-    case 'json':
-      reporter = new JsonReporter();
-      break;
-    case 'cli':
-    default:
-      reporter = new CliReporter();
-  }
-}
 
 function processContent (configFilePath, name, content) {
   reporter.addFile(name, content, dockerfilelint.run(configFilePath, content));
