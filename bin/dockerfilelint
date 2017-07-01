@@ -4,8 +4,9 @@ var process = require('process');
 var fs = require('fs');
 var os = require("os");
 var path = require('path');
+var usage = 'Usage: dockerfilelint [files | content..] [options]';
 var argv = require('yargs')
-             .usage('Usage: dockerfilelint [files | content..] [options]')
+             .usage(usage)
              .option('o', {
                alias: 'output',
                desc: 'Specify the format to use for output of linting results. Valid values are `json` or `cli` (default).',
@@ -47,7 +48,7 @@ if (argv._.length === 0 || argv._[0] === '-') {
   });
   return process.stdin.on('end', function () {
     if (fileContent.length === 0) {
-      console.error('Usage: dockerfilelint <filename or dockerfile contents>');
+      console.error(usage);
       return process.exit(1);
     }
     processContent(configFilePath, '<stdin>', fileContent);
