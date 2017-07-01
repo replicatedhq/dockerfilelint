@@ -50,7 +50,7 @@ describe('cli_reporter', () => {
       expect(report.toString().split('\n')).to.deep.equal([
         '',
         'File:   ' + file,
-        'Issues: \u001b[32mNone found\u001b[39m 👍',
+        'Issues: ' + chalk.green('None found') + ' 👍',
         ''
       ]);
     });
