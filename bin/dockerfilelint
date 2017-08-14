@@ -17,6 +17,9 @@ var argv = require('yargs')
     desc: 'Output linting results as JSON, equivalent to `-o json`.',
     type: 'boolean'
   })
+  .alias('v', 'version')
+  .version(function() { return require('../package').version; })
+  .describe('v', 'show version information')
   .help().alias('h', 'help')
   .example('dockerfilelint Dockerfile', 'Lint a Dockerfile in the current working directory\n')
   .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
