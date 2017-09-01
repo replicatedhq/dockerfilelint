@@ -64,6 +64,16 @@ describe("index", function(){
     });
   });
 
+  describe("#multistage", function(){
+    it("validates the multistage Dockerfile has no issues", function(){
+      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.multistage', 'UTF-8'))).to.be.empty;
+    });
+
+    it("validates the multistagenamed Dockerfile has no issues", function(){
+      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.multistagenamed', 'UTF-8'))).to.be.empty;
+    });
+  });
+
   describe("#shell", function() {
     it("validates the shell command is accepted when entered correctly", function() {
       expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.shell.pass', 'UTF-8'))).to.be.empty;
