@@ -16,6 +16,10 @@ describe("checks", function(){
       expect(checks.expose_port_valid("8000")).to.equal(true);
       expect(checks.expose_port_valid("abc")).to.equal(false);
       expect(checks.expose_port_valid("8000:tcp")).to.equal(false);
+      expect(checks.expose_port_valid("99999999")).to.equal(false);
+      expect(checks.expose_port_valid("80/tcp")).to.equal(true);
+      expect(checks.expose_port_valid("3000/udp")).to.equal(true);
+      expect(checks.expose_port_valid("5000/rdp")).to.equal(false);
     });
   });
 
