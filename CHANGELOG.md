@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/replicatedhq/dockerfilelint/compare/v1.2.0...v1.3.0) (2017-09-12)
+
+
+### Bug Fixes
+
+* port/protocol is a valid Dockerfile syntax ([#85](https://github.com/replicatedhq/dockerfilelint/issues/85)) ([1698c61](https://github.com/replicatedhq/dockerfilelint/commit/1698c61))
+
+
+### Features
+
+* add --version cli option ([#87](https://github.com/replicatedhq/dockerfilelint/issues/87)) ([78b58e2](https://github.com/replicatedhq/dockerfilelint/commit/78b58e2))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/replicatedhq/dockerfilelint/compare/v1.1.2...v1.2.0) (2017-07-03)
 
