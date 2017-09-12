@@ -18,14 +18,13 @@ var argv = require('yargs')
     type: 'boolean'
   })
   .alias('v', 'version')
-  .version(function() { return require('../package').version; })
-  .describe('v', 'show version information')
+  .version(() => require('../package.json').version)
   .help().alias('h', 'help')
   .example('dockerfilelint Dockerfile', 'Lint a Dockerfile in the current working directory\n')
   .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
   .example(`dockerfilelint 'FROM latest'`, 'Lint the contents given as a string on the command line\n')
   .example('dockerfilelint < Dockerfile', 'Lint the contents of Dockerfile via stdin')
-  .wrap(85)
+  .wrap(86)
   .check(argv => {
     if (!argv.output && argv.json) argv.output = 'json'
     return true
