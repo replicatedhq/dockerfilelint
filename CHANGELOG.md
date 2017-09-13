@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/replicatedhq/dockerfilelint/compare/v1.3.0...v1.4.0) (2017-09-13)
+
+
+### Features
+
+* support for multi-stage builds ([#84](https://github.com/replicatedhq/dockerfilelint/issues/84)) ([72d2087](https://github.com/replicatedhq/dockerfilelint/commit/72d2087))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/replicatedhq/dockerfilelint/compare/v1.2.0...v1.3.0) (2017-09-12)
 
