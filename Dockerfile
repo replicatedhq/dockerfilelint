@@ -11,7 +11,7 @@ COPY ./lib /dockerfilelint/lib
 COPY ./bin /dockerfilelint/bin
 COPY ./yarn.lock /dockerfilelint/yarn.lock
 
-RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories &&\
-    apk add --no-cache --virtual build-dependencies yarn@community &&\
-    yarn --no-progress &&\
+RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk add --no-cache --virtual build-dependencies yarn@community && \
+    yarn --no-progress && \
     apk del build-dependencies
