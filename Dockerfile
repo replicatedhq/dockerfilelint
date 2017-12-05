@@ -1,18 +1,17 @@
-FROM node:7.4.0
+FROM node:9.2-alpine
 
-MAINTAINER Marc Campbell <marc.e.campbell@gmail.com>
+LABEL maintainer="Marc Campbell <marc.e.campbell@gmail.com>"
 
-RUN apt-get update && apt-get install --no-install-recommends -y apt-transport-https && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install --no-install-recommends -y yarn && \
-    rm -rf /var/lib/apt/lists/*
+WORKDIR /dockerfilelint
+
+ENTRYPOINT ["/dockerfilelint/bin/dockerfilelint"]
 
 COPY ./package.json /dockerfilelint/package.json
 COPY ./lib /dockerfilelint/lib
 COPY ./bin /dockerfilelint/bin
+COPY ./yarn.lock /dockerfilelint/yarn.lock
 
-WORKDIR /dockerfilelint
-RUN yarn --no-progress
-
-ENTRYPOINT ["/dockerfilelint/bin/dockerfilelint"]
+RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories &&\
+    apk add --no-cache --virtual build-dependencies yarn@community &&\
+    yarn --no-progress &&\
+    apk del build-dependencies
