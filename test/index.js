@@ -77,7 +77,6 @@ describe("index", function(){
   describe("#arg-before-from", function () {
     it("validates the Dockerfile has no issues", function () {
       const lintResult = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.arg-before-from', 'UTF-8'));
-      console.dir(lintResult);
       expect(lintResult).to.be.an('array').that.is.empty;
     });
   });
