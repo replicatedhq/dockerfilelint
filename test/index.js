@@ -74,6 +74,13 @@ describe("index", function(){
     });
   });
 
+  describe("#arg-before-from", function () {
+    it("validates the Dockerfile has no issues", function () {
+      const lintResult = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.arg-before-from', 'UTF-8'));
+      expect(lintResult).to.be.an('array').that.is.empty;
+    });
+  });
+
   describe("#shell", function() {
     it("validates the shell command is accepted when entered correctly", function() {
       expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.shell.pass', 'UTF-8'))).to.be.empty;
@@ -98,7 +105,7 @@ describe("index", function(){
   describe("#misc", function(){
     it("validates the misc Dockerfile have the exact right issues reported", function(){
       var expected = [
-          { title: 'First Command Must Be FROM',
+          { title: 'First Command Must Be FROM or ARG',
             rule: 'from_first',
             line: 4 },
           { title: 'Base Image Missing Tag',
