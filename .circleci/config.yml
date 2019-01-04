@@ -2,9 +2,9 @@ version: 2
 
 environment: &environment
   environment:
-    PROJECT_NAME: dockerfile
-    PROJECT_ORG: replicatedcom
-  working_directory: /tmp/dockerfile
+    PROJECT_NAME: dockerfilelint
+    PROJECT_ORG: replicatedhq
+  working_directory: /tmp/dockerfilelint
 
 defaults: &defaults
   <<: *environment
@@ -12,7 +12,7 @@ defaults: &defaults
     - image: circleci/node:10.3.0
 
 jobs:
-  test:
+  build:
     <<: *defaults
     steps:
     - checkout
@@ -27,8 +27,22 @@ jobs:
     - checkout
     - setup_remote_docker
     - run:
-        name: docker login
-        command: docker login --password $DOCKERHUB_PASSWORD --username $DOCKERHUB_USER
-    - run:
         name: build and push
-        command: cd builders && make builder
+        command: |
+          docker login -u="$DOCKERHUB_DOCKER_USER" -p="$DOCKERHUB_DOCKER_PASS"
+          docker tag replicated/${PROJECT_NAME}:${CIRCLE_SHA1:0:7} replicated/${PROJECT_NAME}:latest;
+          docker push replicated/${PROJECT_NAME}:${CIRCLE_SHA1:0:7};
+          docker push replicated/${PROJECT_NAME}:latest;
+
+workflows:
+  version: 2
+  test_deploy:
+    jobs:
+      - build
+      - push:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+
