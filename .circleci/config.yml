@@ -1,0 +1,34 @@
+version: 2
+
+environment: &environment
+  environment:
+    PROJECT_NAME: dockerfile
+    PROJECT_ORG: replicatedcom
+  working_directory: /tmp/dockerfile
+
+defaults: &defaults
+  <<: *environment
+  docker:
+    - image: circleci/node:10.3.0
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+    - checkout
+    - run:
+        name: test
+        command: |
+          yarn
+          npm test
+  push:
+    <<: *defaults
+    steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: docker login
+        command: docker login --password $DOCKERHUB_PASSWORD --username $DOCKERHUB_USER
+    - run:
+        name: build and push
+        command: cd builders && make builder
