@@ -27,19 +27,19 @@
   },
   "homepage": "https://github.com/replicatedhq/dockerfilelint#readme",
   "dependencies": {
-    "chalk": "^1.1.1",
-    "cliui": "^3.1.0",
+    "chalk": "^2.4.2",
+    "cliui": "^4.1.0",
     "js-yaml": "^3.6.0",
     "lodash": "^4.3.0",
-    "yargs": "^6.6.0"
+    "yargs": "^13.2.1"
   },
   "devDependencies": {
     "chai": "^4.0.1",
-    "coveralls": "^2.11.6",
-    "eslint": "^3.2.2",
+    "coveralls": "^3.0.3",
+    "eslint": "^5.15.1",
     "eslint-config-defaults": "^9.0.0",
-    "nyc": "^10.1.2",
-    "mocha": "^3.0.0",
-    "standard-version": "^4.0.0"
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "standard-version": "^5.0.1"
   }
 }
