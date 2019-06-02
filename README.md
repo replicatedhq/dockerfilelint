@@ -167,6 +167,7 @@ If you don't want to install this locally you can try it out on  [https://fromla
 ### `HEALTHCHECK`
 - [x] No additional parameters when only parameter is `NONE`
 - [x] Options before `CMD` are valid
+- [x] Options before `CMD` have additional arguments
 
 ### Misc
 - [x] Only valid Dockerfile commands are present
