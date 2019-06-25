@@ -18,7 +18,6 @@ var argv = require('yargs')
     type: 'boolean'
   })
   .alias('v', 'version')
-  .version(() => require('../package.json').version)
   .help().alias('h', 'help')
   .example('dockerfilelint Dockerfile', 'Lint a Dockerfile in the current working directory\n')
   .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
