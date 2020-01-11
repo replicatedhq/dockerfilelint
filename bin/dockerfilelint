@@ -17,8 +17,12 @@ var argv = require('yargs')
     desc: 'Output linting results as JSON, equivalent to `-o json`.',
     type: 'boolean'
   })
+  .option('c', {
+    alias: 'config',
+    desc: 'Path for .dockerfilelintrc configuration file',
+    type: 'string'
+  })
   .alias('v', 'version')
-  .version(() => require('../package.json').version)
   .help().alias('h', 'help')
   .example('dockerfilelint Dockerfile', 'Lint a Dockerfile in the current working directory\n')
   .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
@@ -64,7 +68,7 @@ argv._.forEach((fileName) => {
     if (stats.isFile()) {
       fileContent = fs.readFileSync(fileName, 'UTF-8');
       var root = (os.platform == "win32") ? process.cwd().split(path.sep)[0] : "/";
-      configFilePath = path.resolve(path.dirname(fileName));
+      configFilePath = argv.config || path.resolve(path.dirname(fileName));
     }
   } catch (e) {
     if (e.code === 'ENOENT') {
