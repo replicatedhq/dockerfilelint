@@ -143,6 +143,44 @@ describe("index", function(){
     });
   });
 
+  describe("#healthcheck", function () {
+    it("validates the HEALTHCHECK syntax issues are detected", function () {
+      var expected = [
+        { title: 'Multiple HEALTHCHECK declarations',
+          line: 4,
+          rule: 'multiple_healthchecks'},
+        { title: 'HEALTHCHECK trailing options',
+          line: 6,
+          rule: 'healthcheck_trailing_opts'},
+        { title: 'HEALTHCHECK trailing options',
+          line: 7,
+          rule: 'healthcheck_trailing_opts'},
+        { title: 'HEALTHCHECK trailing options',
+          line: 8,
+          rule: 'healthcheck_trailing_opts'},
+        { title: 'Invalid Argument Format',
+          line: 9,
+          rule: 'invalid_format'},
+        { title: 'Invalid Argument Format',
+          line: 10,
+          rule: 'invalid_format'},
+        { title: 'Invalid Argument Format',
+          line: 11,
+          rule: 'invalid_format'},
+        { title: 'Invalid Argument Format',
+          line: 12,
+          rule: 'invalid_format'},
+      ];
+      const lintResult = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.healthcheck', 'UTF-8'));
+      _.forEach(lintResult, function(r) {
+        delete r['description'];
+        delete r['category'];
+      });
+      expect(lintResult).to.have.length(expected.length);
+      expect(lintResult).to.deep.equal(expected);
+    });
+  });
+
   describe("#misc", function(){
     it("validates the misc Dockerfile have the exact right issues reported", function(){
       var expected = [
@@ -197,36 +235,42 @@ describe("index", function(){
           { title: 'apt-get update without matching apt-get install',
             rule: 'apt-get-update_require_install',
             line: 16 },
+          { title: 'Empty continuation line',
+            rule: 'empty_continuation_line',
+            line: 17 },
           { title: 'Consider `--no-cache or --update with rm -rf /var/cache/apk/*`',
             rule: 'apkadd-missing_nocache_or_updaterm',
-            line: 21 },
+            line: 22 },
           { title: 'Consider `--virtual` when using apk add and del together in a command.',
             rule: 'apkadd-missing-virtual',
-            line: 22 },
+            line: 23 },
           { title: 'Invalid Port Exposed',
             rule: 'invalid_port',
-            line: 24 },
+            line: 25 },
           { title: 'Expose Only Container Port',
             rule: 'expose_host_port',
-            line: 25 },
+            line: 26 },
           { title: 'Invalid Argument Format',
             rule: 'invalid_format',
-            line: 27 },
+            line: 28 },
           { title: 'Label Is Invalid',
             rule: 'label_invalid',
-            line: 29 },
+            line: 30 },
           { title: 'Extra Arguments',
             rule: 'extra_args',
-            line: 31 },
+            line: 32 },
           { title: 'Invalid WORKDIR',
             rule: 'invalid_workdir',
-            line: 32 },
+            line: 33 },
+          { title: 'Multiple STOPSIGNAL declarations',
+            rule: 'multiple_stopsignals',
+            line: 37 },
           { title: 'Invalid ADD Source',
             rule: 'add_src_invalid',
-            line: 36 },
+            line: 38 },
           { title: 'Invalid ADD Destination',
             rule: 'add_dest_invalid',
-            line: 36 }
+            line: 38 }
         ];
 
       var result = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.misc', 'UTF-8'));

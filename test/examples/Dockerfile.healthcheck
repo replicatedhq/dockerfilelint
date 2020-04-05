@@ -1,0 +1,12 @@
+FROM ruby:2.7
+# correct
+HEALTHCHECK none
+HEALTHCHECK --interval=1 CMD curl localhost:8080
+# invalid
+HEALTHCHECK CMD --interval=1 curl localhost:8080
+HEALTHCHECK CMD --interval=1
+HEALTHCHECK CMD curl localhost --interval=1
+HEALTHCHECK CMD
+HEALTHCHECK --interval=1
+HEALTHCHECK none CMD curl
+HEALTHCHECK --interval=1 none
