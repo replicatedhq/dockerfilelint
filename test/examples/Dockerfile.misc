@@ -17,6 +17,7 @@ RUN apt-get update -y
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 		curl \
+
 	&& rm -rf /var/lib/apt/lists/*
 RUN apk add python-pip
 RUN apk add --no-cache python-dev build-base wget && apk del python-dev build-base wget
@@ -32,6 +33,7 @@ USER ubuntu ubuntu
 WORKDIR in valid
 ARG test
 ONBUILD RUN echo test
+STOPSIGNAL SIGKILL
 STOPSIGNAL SIGKILL
 ADD /test* /test2
 CMD ["bash"]

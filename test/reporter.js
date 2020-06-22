@@ -76,7 +76,7 @@ describe('reporter', () => {
       expect(Object.keys(reporter.fileReports)).to.have.length(1);
       let fileReport = reporter.fileReports[file];
       expect(fileReport.uniqueIssues).to.equal(3);
-      expect(fileReport.contentArray).to.have.length(40);
+      expect(fileReport.contentArray).to.have.length(42);
       expect(fileReport.itemsByLine).to.deep.equal({
         '5': [ items[0] ],
         '6': items.splice(1)
@@ -104,7 +104,7 @@ describe('reporter', () => {
       expect(Object.keys(reporter.fileReports)).to.have.length(1);
       let fileReport = reporter.fileReports[file];
       expect(fileReport.uniqueIssues).to.equal(1);
-      expect(fileReport.contentArray).to.have.length(40);
+      expect(fileReport.contentArray).to.have.length(42);
       expect(fileReport.itemsByLine).to.deep.equal({
         '6': [ items[0] ]
       });
@@ -149,7 +149,7 @@ describe('reporter', () => {
       });
       let file2Report = reporter.fileReports[file2];
       expect(file2Report.uniqueIssues).to.equal(2);
-      expect(file2Report.contentArray).to.have.length(40);
+      expect(file2Report.contentArray).to.have.length(42);
       expect(file2Report.itemsByLine).to.deep.equal({
         '5': [ file2Items[0] ],
         '6': [ file2Items[1] ]

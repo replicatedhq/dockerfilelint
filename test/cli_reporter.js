@@ -99,7 +99,7 @@ describe('cli_reporter', () => {
           title: 'Expose Only Container Port',
           description: 'Using `EXPOSE` to specify a host port is not allowed.',
           category: 'Deprecation',
-          line: 25
+          line: 26
         }
       ];
       let report = new CliReporter()
@@ -124,7 +124,7 @@ describe('cli_reporter', () => {
         '    ' + chalk.cyan('3') + '  ' + chalk.cyan.inverse('Clarity') + '       ' + chalk.cyan('Base Image Latest') + '     ' + chalk.gray('Base images should not use the latest tag.'),
         '                     ' + chalk.cyan('Tag'),
         '',
-        'Line 25: ' + chalk.magenta('EXPOSE 80:80'),
+        'Line 26: ' + chalk.magenta('EXPOSE 80:80'),
         'Issue  Category      Title                 Description',
         '    ' + chalk.red('4') + '  ' + chalk.red.inverse('Deprecation') + '   ' + chalk.red('Expose Only') + '           ' + chalk.gray('Using `EXPOSE` to specify a host port is not allowed.'),
         '                     ' + chalk.red('Container Port'),

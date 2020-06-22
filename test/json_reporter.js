@@ -81,7 +81,7 @@ describe('json_reporter', () => {
           description: 'Base images should not use the latest tag.'
         },
         {
-          line: '25',
+          line: '26',
           content: 'EXPOSE 80:80',
           category: 'Deprecation',
           title: 'Expose Only Container Port',
