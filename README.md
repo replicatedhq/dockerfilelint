@@ -57,9 +57,9 @@ rules:
   uppercase_commands: off
 ```
 
-The keys for the rules can be any file in the /lib/reference.js file.  At this time, it's only possible to disable rules.  They are all enabled by default.  
+The keys for the rules can be any file in the /lib/reference.js file.  At this time, it's only possible to disable rules.  They are all enabled by default.
 
-The following rules are supported:  
+The following rules are supported:
 ```
 required_params
 uppercase_commands
@@ -194,6 +194,11 @@ If you don't want to install this locally you can try it out on  [https://fromla
 
 - [ ] Validate input
 - [ ] Only present one time
+
+### `HEALTHCHECK`
+- [x] No additional parameters when only parameter is `NONE`
+- [x] Options before `CMD` are valid
+- [x] Options before `CMD` have additional arguments
 
 ### Misc
 
