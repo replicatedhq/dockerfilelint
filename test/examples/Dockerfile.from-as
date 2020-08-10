@@ -1,0 +1,1 @@
+FROM repo/image:latest as example

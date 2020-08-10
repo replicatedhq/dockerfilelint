@@ -1,0 +1,1 @@
+FROM some.registry:1234/repo/image:abcde

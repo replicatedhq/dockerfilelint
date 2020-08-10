@@ -81,6 +81,47 @@ describe("index", function(){
     });
   });
 
+  describe("#from-with-as", function () {
+    it("validates the Dockerfile detects latest when using as", function () {
+      var expected = [
+        { title: 'Base Image Latest Tag',
+          line: 1,
+          rule: 'latest_tag'}
+      ];
+      const lintResult = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.from-as', 'UTF-8'));
+      _.forEach(lintResult, function(r) {
+        delete r['description'];
+        delete r['category'];
+      });
+      expect(lintResult).to.have.length(expected.length);
+      expect(lintResult).to.deep.equal(expected);
+    });
+  });
+
+  describe("#from-with-port", function () {
+    it("validates the Dockerfile detects latest when it has a port", function () {
+      var expected = [
+        { title: 'Base Image Latest Tag',
+          line: 1,
+          rule: 'latest_tag'}
+      ];
+      const lintResult = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.from-with-port', 'UTF-8'));
+      _.forEach(lintResult, function(r) {
+        delete r['description'];
+        delete r['category'];
+      });
+      expect(lintResult).to.have.length(expected.length);
+      expect(lintResult).to.deep.equal(expected);
+    });
+  });
+
+  describe("#from-with-port-no-latest", function () {
+    it("validates the Dockerfile detects not latest when it has a port", function () {
+      const lintResult = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.from-with-port-no-latest', 'UTF-8'));
+      expect(lintResult).to.have.length(0);
+    });
+  });
+
   describe("#shell", function() {
     it("validates the shell command is accepted when entered correctly", function() {
       expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.shell.pass', 'UTF-8'))).to.be.empty;
