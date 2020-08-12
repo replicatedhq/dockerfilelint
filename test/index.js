@@ -51,9 +51,9 @@ describe("index", function(){
     });
   });
 
-  describe("#from-scratch", function(){
-    it("validates that from-scratch does not return an error", function(){
-      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.from-scratch', 'UTF-8'))).to.be.empty;
+  describe("#issue145", function(){
+    it("validates that issue145 does not return an error", function(){
+      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.issue145', 'UTF-8'))).to.be.empty;
     });
   });
 
