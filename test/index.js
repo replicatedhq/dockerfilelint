@@ -40,6 +40,17 @@ describe("index", function(){
     });
   });
 
+  describe("#from-latest-multistage", function(){
+    it("validates the from-latest-multistage Dockerfile has 3 issues", function(){
+      const actual = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.from-latest-multistage', 'UTF-8'));
+      expect(actual).to.have.length(2);
+      expect(actual[0].line).to.equal(1);
+      expect(actual[0].rule).to.equal('latest_tag');
+      expect(actual[1].line).to.equal(6);
+      expect(actual[1].rule).to.equal('latest_tag');
+    });
+  });
+
   describe("#redis", function(){
     it("validates the redis Dockerfile has no issues", function(){
       expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.redis', 'UTF-8'))).to.be.empty;
