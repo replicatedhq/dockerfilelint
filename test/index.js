@@ -51,6 +51,12 @@ describe("index", function(){
     });
   });
 
+  describe("#from-scratch", function(){
+    it("validates that from-scratch does not return an error", function(){
+      expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.from-scratch', 'UTF-8'))).to.be.empty;
+    });
+  });
+
   describe("#redis", function(){
     it("validates the redis Dockerfile has no issues", function(){
       expect(dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.redis', 'UTF-8'))).to.be.empty;
