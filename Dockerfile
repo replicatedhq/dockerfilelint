@@ -1,4 +1,4 @@
-FROM node:10.3.0-alpine
+FROM node:12.18-alpine
 LABEL maintainer="Marc Campbell <marc.e.campbell@gmail.com>"
 
 RUN apk --no-cache add yarn
