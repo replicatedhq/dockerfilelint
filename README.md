@@ -164,7 +164,7 @@ If you don't want to install this locally you can try it out on  [https://fromla
 
 ### `ENTRYPOINT`
 
-- [ ] Support
+- [x] Support
 
 ### `VOLUME`
 
