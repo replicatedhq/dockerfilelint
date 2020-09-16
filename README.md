@@ -2,6 +2,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/replicatedhq/dockerfilelint/badge.svg?branch=master)](https://coveralls.io/github/replicatedhq/dockerfilelint?branch=master)
 [![Build Status](https://travis-ci.org/replicatedhq/dockerfilelint.svg?branch=master)](https://travis-ci.org/replicatedhq/dockerfilelint)
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/replicatedhq/dockerfilelint) 
+
 
 `dockerfilelint` is an node module that analyzes a Dockerfile and looks for common traps, mistakes and helps enforce best practices.
 
