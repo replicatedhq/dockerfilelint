@@ -33,7 +33,7 @@ describe('reporter', () => {
       let fileContent = fs.readFileSync(file, 'UTF-8');
       let item = {
         title: 'Consider `--no-install-recommends`',
-        description: 'Consider using a `--no-install-recommends` when `apt-get` installing packages.  This will result in a smaller image size.  For\nmore information, see [this blog post](http://blog.replicated.com/2016/02/05/refactoring-a-dockerfile-for-image-size/)',
+        description: 'Consider using a `--no-install-recommends` when `apt-get` installing packages.  This will result in a smaller image size.  For\nmore information, see [this blog post](https://blog.replicated.com/refactoring-a-dockerfile-for-image-size/)',
         category: 'Optimization',
         line: 5
       };
@@ -116,7 +116,7 @@ describe('reporter', () => {
       let file1Items = [
         {
           title: 'Consider `--no-install-recommends`',
-          description: 'Consider using a `--no-install-recommends` when `apt-get` installing packages.  This will result in a smaller image size.  For\nmore information, see [this blog post](http://blog.replicated.com/2016/02/05/refactoring-a-dockerfile-for-image-size/)',
+          description: 'Consider using a `--no-install-recommends` when `apt-get` installing packages.  This will result in a smaller image size.  For\nmore information, see [this blog post](https://blog.replicated.com/refactoring-a-dockerfile-for-image-size/)',
           category: 'Optimization',
           line: 5
         }
