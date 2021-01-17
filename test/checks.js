@@ -133,6 +133,7 @@ describe("checks", function(){
       expect(checks.is_valid_healthcheck("--interval=10s cmd argument --someotherargument")).to.be.empty;
       expect(checks.is_valid_healthcheck("--interval cmd argument")).to.eql(['healthcheck_options_missing_args']);
       expect(checks.is_valid_healthcheck("--interval=10s --timeout cmd argument")).to.eql(['healthcheck_options_missing_args']);
+      expect(checks.is_valid_healthcheck("--interval=30s --timeout=10s --start-period=15s --retries=5 cmd")).to.be.empty;
     })
   });
 });
