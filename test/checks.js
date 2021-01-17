@@ -135,4 +135,11 @@ describe("checks", function(){
       expect(checks.is_valid_healthcheck("--interval=10s --timeout cmd argument")).to.eql(['healthcheck_options_missing_args']);
     })
   });
+
+  describe("#is_valid_shell(args)", function() {
+    it("validates shell command is valid", function(){
+      expect(checks.is_valid_shell("cmd1 --arg1=10s arg2")).to.eql(['invalid_format']);
+      expect(checks.is_valid_shell("[\"cmd1\", \"cmd2\"]")).to.be.empty;
+    })
+  });
 });
