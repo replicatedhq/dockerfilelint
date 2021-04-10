@@ -33,7 +33,7 @@ var argv = require('yargs')
   .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
   .example(`dockerfilelint 'FROM latest'`, 'Lint the contents given as a string on the command line\n')
   .example('dockerfilelint < Dockerfile', 'Lint the contents of Dockerfile via stdin')
-  .example('dockerfilelint -c custom-ruleset.js Dockerfile', 'Lint the contents of Dockerfile using the default rules plus a set of custom rules defined in custom-ruleset.js')
+  .example('dockerfilelint -r custom-ruleset.js Dockerfile', 'Lint the contents of Dockerfile using the default rules plus a set of custom rules defined in custom-ruleset.js')
   .wrap(86)
   .check(argv => {
     if (!argv.output && argv.json) argv.output = 'json'
