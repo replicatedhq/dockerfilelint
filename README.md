@@ -116,7 +116,7 @@ module.exports.rules = {
 }
 ```
 
-Notice, if a rule function return true, it will be sent as a message to the reporter, otherwise it will be ignored for that line.
+Notice, if a rule function returns true, it will be sent as a message to the reporter, otherwise it will be ignored for that line.
 
 After you have your ruleset defined, simply call dockerfilelint with the -r command to pass the ruleset file in:
 
