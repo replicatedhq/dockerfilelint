@@ -160,6 +160,24 @@ describe("index", function(){
     });
   });
 
+  describe("#customRuleset", function() {
+    it("validates a custom ruleset can be supplied to extend rules", function() {
+      let expected = [{
+        title: 'Avoid Curl Bashing',
+        line: 3,
+        rule: 'avoid_curl_bashing'
+      }]
+      let result = dockerfilelint.run('./test/examples', fs.readFileSync('./test/examples/Dockerfile.custom-ruleset', 'UTF-8'), './test/ruleset.js');
+      _.forEach(result, function(r) {
+        delete r['function'];
+        delete r['description'];
+        delete r['category'];
+      });
+      expect(result).to.have.length(expected.length);
+      expect(result).to.deep.equal(expected);
+    });
+  });
+
   describe("#misc", function(){
     it("validates the misc Dockerfile have the exact right issues reported", function(){
       var expected = [
