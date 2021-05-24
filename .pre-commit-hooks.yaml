@@ -1,0 +1,6 @@
+- id: dockerfilelint
+  name: Dockerfilelint
+  description: A linter for Dockerfiles to find bugs and encourage best practices
+  entry: dockerfilelint
+  language: node
+  types_or: [dockerfile]
