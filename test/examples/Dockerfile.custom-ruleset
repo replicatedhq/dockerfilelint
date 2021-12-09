@@ -1,0 +1,3 @@
+FROM scratch
+
+RUN wget http://my_website/script.sh | sh

@@ -33,20 +33,26 @@ Options:
   -o, --output   Specify the format to use for output of linting results. Valid values
                  are `json` or `cli` (default).                               [string]
   -j, --json     Output linting results as JSON, equivalent to `-o json`.    [boolean]
+  -c, --config   Path for .dockerfilelintrc configuration file                [string]
+  -r, --ruleset  Path for custom ruleset js file                              [string]
   -v, --version  Show version number                                         [boolean]
   -h, --help     Show help                                                   [boolean]
 
 Examples:
-  dockerfilelint Dockerfile         Lint a Dockerfile in the current working
-                                    directory
+  dockerfilelint Dockerfile                    Lint a Dockerfile in the current
+                                               working directory
 
-  dockerfilelint test/example/* -j  Lint all files in the test/example directory and
-                                    output results in JSON
+  dockerfilelint test/example/* -j             Lint all files in the test/example
+                                               directory and output results in JSON
 
-  dockerfilelint 'FROM latest'      Lint the contents given as a string on the
-                                    command line
+  dockerfilelint 'FROM latest'                 Lint the contents given as a string on
+                                               the command line
 
-  dockerfilelint < Dockerfile       Lint the contents of Dockerfile via stdin
+  dockerfilelint < Dockerfile                  Lint the contents of Dockerfile via
+                                               stdin
+  dockerfilelint -r custom-ruleset.js          Lint the contents of Dockerfile using
+  Dockerfile                                   the default rules plus a set of custom
+                                               rules defined in custom-ruleset.js
 ```
 
 #### Configuring
@@ -87,6 +93,41 @@ invalid_workdir
 invalid_format
 apt-get_missing_rm
 deprecated_in_1.13
+```
+
+### Custom Rulesets
+
+You can add your own custom rulesets by supplying the -r option to dockerfilelint. Simply create a ruleset.js file first. It must export the "rules" variable with the proper keys. Here is an example of a simple two-rule ruleset file.
+
+```
+module.exports.rules = {
+  'add_prohibited': {
+    'title': 'ADD Command Prohibited',
+    'description': 'ADD command is not allowed! Use copy instead!',
+    'category': 'Optimization',
+    'function': ({ cmd, args, line, instruction }) => {
+      return cmd.toLowerCase() === 'add';
+    }
+  },
+
+  'avoid_curl_bashing': {
+    'title': 'Avoid Curl Bashing',
+    'description': 'Do not pipe bash or wget commands directly to shell. This is very insecure and can cause many issues with security. If you must, make sure to vet the script and verify its authenticity. E.G. "RUN wget http://my_website/script.sh | sh" is prohibited',
+    'category': 'Optimization',
+    'function': ({ cmd, line, args}) => {
+      // This function doesn't care about full instruction so it omits if from arguments
+      return cmd.toLowerCase() === 'run' && args.match(/(curl|wget)[^|^>]*[|>]/);
+    }
+  },
+}
+```
+
+Notice, if a rule function returns true, it will be sent as a message to the reporter, otherwise it will be ignored for that line.
+
+After you have your ruleset defined, simply call dockerfilelint with the -r command to pass the ruleset file in:
+
+```
+dockerfilelint -r path/to/ruleset.js path/to/Dockerfile
 ```
 
 #### From a Docker container

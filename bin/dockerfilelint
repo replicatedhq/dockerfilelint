@@ -22,12 +22,18 @@ var argv = require('yargs')
     desc: 'Path for .dockerfilelintrc configuration file',
     type: 'string'
   })
+  .option('r', {
+    alias: 'ruleset',
+    desc: 'Path for custom ruleset js file',
+    type: 'string'
+  })
   .alias('v', 'version')
   .help().alias('h', 'help')
   .example('dockerfilelint Dockerfile', 'Lint a Dockerfile in the current working directory\n')
   .example('dockerfilelint test/example/* -j', 'Lint all files in the test/example directory and output results in JSON\n')
   .example(`dockerfilelint 'FROM latest'`, 'Lint the contents given as a string on the command line\n')
   .example('dockerfilelint < Dockerfile', 'Lint the contents of Dockerfile via stdin')
+  .example('dockerfilelint -r custom-ruleset.js Dockerfile', 'Lint the contents of Dockerfile using the default rules plus a set of custom rules defined in custom-ruleset.js')
   .wrap(86)
   .check(argv => {
     if (!argv.output && argv.json) argv.output = 'json'
@@ -41,7 +47,7 @@ var chalk = require('chalk');
 var Reporter = argv.output === 'json' ? require('../lib/reporter/json_reporter') : require('../lib/reporter/cli_reporter');
 var reporter = new Reporter();
 
-var fileContent, configFilePath;
+var fileContent, configFilePath, customRuleset;
 if (argv._.length === 0 || argv._[0] === '-') {
   // read content from stdin
   fileContent = '';
@@ -83,13 +89,14 @@ argv._.forEach((fileName) => {
     return process.exit(1);
   }
 
-  processContent(configFilePath, fileName, fileContent);
+  processContent(configFilePath, fileName, fileContent, argv.ruleset);
 });
 
 report();
 
-function processContent (configFilePath, name, content) {
-  reporter.addFile(name, content, dockerfilelint.run(configFilePath, content));
+function processContent (configFilePath, name, content, customRulesetPath) {
+  const items = dockerfilelint.run(configFilePath, content, customRulesetPath);
+  reporter.addFile(name, content, items, customRulesetPath);
 }
 
 function report () {
